@@ -1,0 +1,152 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instructions</title>
+  <style>
+    #hiddenInput {
+      display: none;
+    }
+
+    #progress-container {
+      width: 100%;
+      background-color: #f3f3f3;
+      border: 1px solid #ddd;
+      margin-top: 20px;
+    }
+
+    #progress-bar {
+    height: 30px;
+    width: 0;
+    background-color:#4caf50;
+    color: white;
+    line-height: 30px; /* Align text vertically */
+    text-align: center; /* Center text horizontally */
+    transition: width 0.1s;
+    display: flex; /* Use flexbox to center text */
+    align-items: center; /* Vertically center text */
+    justify-content: center; /* Horizontally center text */
+  }
+  </style>
+</head>
+
+<body>
+  <div id="container-instructions">
+    <h1>Instructions</h1>
+    <hr />
+    <div class="instructions well">
+      <p>
+        <strong>Before we start, let's do some screen settings.<br>
+         For best experience, set your monitor to: <br><br>
+          1. Screen rate of 60Hz<br>
+          2. Screen resolution of 1920 (width) x 1080 (height).<br>
+          3. Scaling of 100% for the browser and the desktop (not zoomed in or out) <br>
+          4. Maximise your browser<br><br>
+         Then click Ok. This will trigger a 5-second screen review to get the details of your screen. </strong>
+      </p>
+    </div>
+
+    <center><button type="button" id="ok-btn">Start</button></center>
+
+    <!-- Progress bar -->
+    <div id="progress-container">
+      <div id="progress-bar">0%</div>
+    </div>
+
+    <p id="refresh-rate"></p>
+    <p id="resolution"></p>
+    <p id="feedback" style="font-size: 20px;"></p>
+  </div>
+
+  <script type="text/javascript">
+
+    var requiredRate=165; //60;
+    var requiredWidth= 1920;
+    var requiredHeight=1080; //to switch back before launch--i don't know why my laptop only has 165 and 40 Hz :(
+    var screenWidth=0;
+    var screenHeight=0;
+
+    function measureScreenResolution() {
+        screenWidth = window.screen.width;
+        screenHeight = window.screen.height;      
+      }
+
+      function measureRefreshRate(duration) {
+        return new Promise((resolve) => {
+          let frameCount = 0;
+          let startTime = performance.now();
+
+          function countFrames(timestamp) {
+            frameCount++;
+            const elapsed = timestamp - startTime;
+            const progress = Math.min(100, (elapsed / duration) * 100);
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-bar').innerText = Math.round(progress) + '%';
+
+            if (elapsed < duration) {
+              requestAnimationFrame(countFrames);
+            } else {
+              const elapsedSeconds = elapsed / 1000;
+              const refreshRate = frameCount / elapsedSeconds;
+              resolve(refreshRate);
+            }
+          }
+
+          requestAnimationFrame(countFrames);
+        });
+      }
+
+    document.getElementById("ok-btn").onclick = function () {
+      document.addEventListener('keydown', function(event) {
+        // Check if Ctrl+K is pressed
+        if (event.ctrlKey && event.key === 'k') {
+          event.preventDefault(); // Prevent default browser behavior
+          console.log('Ctrl+K pressed');
+          document.getElementById("next").style.display = 'block';
+        }
+      });
+      
+      
+      measureScreenResolution();
+      // Measure the refresh rate over 5 seconds
+      measureRefreshRate(5000).then(refreshRate => {
+        var roundedRefreshRate = Math.floor(refreshRate);
+        document.getElementById('refresh-rate').innerText = `Estimated Refresh Rate: ${roundedRefreshRate} Hz`;
+        // Display screen resolution
+        document.getElementById('resolution').innerText =`Screen Resolution: ${screenWidth} x ${screenHeight}`;
+
+        // if (roundedRefreshRate < requiredRate-5 ||roundedRefreshRate > requiredRate+5|| screenWidth !== requiredWidth || screenHeight !== requiredHeight) {
+        //   document.getElementById('feedback').innerText ='Please set your screen refresh rate to 60 Hz and ensure your screen resolution is 1920x1080 at 100% scaling.\nThen click ok for the screen check again.';
+        // }else{
+          document.getElementById('feedback').innerText ='These are your monitor specs. You are all set! Click on Next to proceed.';
+          document.getElementById("next").style.display = 'block';
+        // }
+
+        // Reset progress bar after measurement
+        document.getElementById('progress-bar').style.width = '0%';
+        document.getElementById('progress-bar').innerText = '0%';
+      }).catch(error => {
+        console.error('Error measuring refresh rate:', error);
+      });
+  
+    }
+  </script>
+<hr />
+  <div class="instructionsnav">
+    <div class="row">
+      <div class="col-xs-2">
+        <!-- no previous button on first screen -->
+      </div>
+      <div class="col-xs-8">
+      </div>
+      <div class="col-xs-2">
+        <button type="button" id="next" value="next" style="display:none;" class="btn btn-primary btn-lg continue">
+          Next <span class="glyphicon glyphicon-arrow-right"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+  </div>
+
+</body>

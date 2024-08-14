@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructions</title>
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+</head>
+<body>
+    <div id="container-instructions">
+        <h1>Instructions</h1>
+        <hr />
+        <div class="instructions well">
+            <p>
+                You will be presented with a video of moving objects.
+                Your task is to count the number of times the black ball crosses the midline.
+                Try to be as accurate as possible.
+            </p>
+            <strong>Let's begin with a sample trial. </strong><br>
+            <!-- Step 1: Count the number of times the black ball crosses the midline.<br>
+            Step 2: When the video finishes, enter the number of crosses you've counted.<br> -->
+        </div>
+        <center>
+            <div>
+                <video
+                    id="my-video"
+                    class="video-js"
+                    preload="auto"
+                    controls
+                    width="100%"
+                    height="auto">
+                    <source src="{{ server_location }}/static/video.mp4" type="video/mp4" />
+                </video>
+            </div>
+        </center>
+        <hr />
+        <div class="instructionsnav">
+            <div class="row">
+                <div class="col-xs-2">
+                    <!-- no previous button on first screen -->
+                </div>
+                <div class="col-xs-8">
+                </div>
+                <div class="col-xs-2">
+                    <button type="button" id="next" value="next" class="btn btn-primary btn-lg continue">
+                        Next <span class="glyphicon glyphicon-arrow-right"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM fully loaded and parsed");
+            var myPlayer = videojs('my-video');
+            console.log("videojs is ready");
+            myPlayer.ready(function() {
+                console.log("Player is ready");
+                myPlayer.requestFullscreen();
+                myPlayer.play();
+            });
+        });
+    </script>
+</body>
+</html>

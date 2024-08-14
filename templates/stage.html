@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Experiment Stage</title>
+    <style>
+        /* Example CSS for styling */
+        #trial-number {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body> <!-- seems like the video is being centered in another box. I commented the container bits out but it's still not centered-->
+    <!-- <div id="container-exp"> -->
+        <!-- <div id="trial"> -->
+            <div id="trial-number">Trial 1</div> <!-- Add this line for trial number -->
+            <center>
+                <video id="my-video-exp" class="video-js" width="1920" height="auto">
+                    <source src="https://iabshui.s3.amazonaws.com/test_vids/video.mp4" type="video/mp4" />
+                </video>
+            </center>
+            <center>
+                <input type="number" id="hiddenInput" name="hiddenInput" placeholder="Num of midline crossings"
+                    style="display:none;">
+            </center>
+            <center>
+                <button type="button" id="exp_play" value="play" style="display:none;" class="btn btn-primary btn-lg continue">
+                    Play
+                </button>
+            </center>
+        <!-- </div> -->
+    <!-- </div> -->
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <!-- JavaScript code goes here -->
+    <script>
+        // Place the JavaScript code provided above here
+    </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        /* Ensure the font size matches the rest of your code */
+        #next {
+            font-size: 20px;
+            /* Adjust as necessary */
+            font-family: Arial, sans-serif;
+            /* Ensure consistency with your original font family */
+        }
+
+        /* Other relevant CSS to keep font sizes consistent */
+        select,
+        input {
+            font-size: 20px;
+            /* Adjust as necessary */
+            font-family: Arial, sans-serif;
+            /* Ensure consistency with your original font family */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container-questionnaire">
+        <h1>Final stretch!</h1>
+
+        <hr />
+        <p style="font-size: 20px;">Note: Please answer ALL questions to receive payment for your participation.</p>
+
+        <div class="instructions well">
+            <form id="postquiz" action="debrief" method="post">
+
+                 <!-- beginning of a question -->
+                 <div class="row question">
+                    <div class="col-md-8">
+                        Did you see anything different in the LAST video?
+                    </div>
+                    <div class="col-md-4">
+                        <select id="UE-detection" name="UE-detection">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                            <option value="default" SELECTED> </option>
+                        </select>
+                    </div>
+                </div>
+                <!-- end of a question -->
+
+                <!-- beginning of a question -->
+                <div class="row question">
+                    <div class="col-md-8">
+                     Please elaborate. For e.g., if you saw something different, what did you see? If you did not, please state so too.
+                    </div>
+                    <div class="col-md-12">
+                        <input type="text" id="difference" name="difference" placeholder=""
+                            style="display:block; width: 100%; height:100%; max-width: 1300px;">
+                    </div>
+                </div>
+                <!-- end of a question -->
+
+
+                <!-- beginning of a question -->
+                <div class="row question">
+                    <div class="col-md-8">
+                        Did you experience any of technical issues with the LAST video, e.g., low quality, playback
+                        issues
+                        like video slowing unexpectedly or freezing?
+                    </div>
+                    <div class="col-md-4">
+                        <select id="UE-detection" name="UE-detection">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                            <option value="default" SELECTED> </option>
+                        </select>
+                    </div>
+                </div>
+                <!-- end of a question -->
+
+                <!-- beginning of a question -->
+                <div class="row question">
+                    <div class="col-md-8">
+                        Before today, have you heard of or completed a similar study? Please elaborate (e.g., if yes, what was the study about?)
+                    </div>
+                    <div class="col-md-12">
+                        <input type="text" id="similar" name="similar" placeholder=""
+                            style="display:block; width: 100%; height:100%; max-width: 1300px;">
+                    </div>
+                </div>
+                <!-- end of a question -->
+
+                <!-- beginning of a question -->
+                <div class="row question">
+                    <div class="col-md-8">
+                        On a scale of 1-10 (where 10 is the most engaged), please rate how <b>ENGAGED</b> were you with
+                        the task:
+                    </div>
+                    <div class="col-md-4">
+                        <select id="engagement-rating" name="engagement-rating">
+                            <option value="10">10 - Very engaged</option>
+                            <option value="9">9</option>
+                            <option value="8">8</option>
+                            <option value="7">7</option>
+                            <option value="6">6</option>
+                            <option value="5">5 - Moderately engaged</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1 - Task was not engaging at all and I quickly lost focus.</option>
+                            <option value="default" SELECTED></option>
+                        </select>
+                    </div>
+                </div>
+                <!-- end of a question -->
+
+                <!-- beginning of a question -->
+                <div class="row question">
+                    <div class="col-md-8">
+                        On a scale of 1-10 (where 10 is the most difficult), please rate how <b>DIFFICULT</b> you found
+                        the
+                        task:
+                    </div>
+                    <div class="col-md-4">
+                        <select id="difficulty" name="difficulty">
+                            <option value="10">10 - Very difficult</option>
+                            <option value="9">9</option>
+                            <option value="8">8</option>
+                            <option value="7">7</option>
+                            <option value="6">6</option>
+                            <option value="5">5 - Moderately difficult</option>
+                            <option value="4">4</option>
+                            <option value="3">3</option>
+                            <option value="2">2</option>
+                            <option value="1">1</option>
+                            <option value="0">0 - Not difficult at all</option>
+                            <option value="default" SELECTED> </option>
+                        </select>
+                    </div>
+                </div>
+                <!-- end of a question -->
+            </form>
+        </div>
+
+        <hr />
+
+        <div class="instructionsnav">
+            <div class="row">
+                <div class="col-xs-2">
+                </div>
+                <div class="col-xs-7">
+                </div>
+                <div class="col-xs-3">
+                    <button type="button" id="next" value="next" style="display:block;"
+                        class="btn btn-primary btn-lg continue">
+                        Continue <span class="glyphicon glyphicon-arrow-right"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var selectElements = document.querySelectorAll('select');
+            var hiddenInput = document.getElementById('hiddenInput');
+            var nextButton = document.getElementById('next');
+
+            // Function to check if all fields are filled
+            function validateForm() {
+                var allFilled = true;
+
+                // Check if all select elements have a value
+                selectElements.forEach(function(select) {
+                    if (select.value === '' || select.value === 'default') {
+                        allFilled = false;
+                    }
+                });
+
+                // Check if the hidden input field is filled
+                if (hiddenInput && hiddenInput.value.trim() === '') {
+                    allFilled = false;
+                }
+
+                // Enable the "Continue" button if all fields are filled
+                if (allFilled){
+                    document.getElementById("next").style.display = 'block';
+                }
+            }
+
+            // Add event listeners to select elements and the hidden input field
+            selectElements.forEach(function(select) {
+                select.addEventListener('change', validateForm);
+            });
+
+            if (hiddenInput) {
+                hiddenInput.addEventListener('input', validateForm);
+            }
+
+            // Initial validation when the page loads
+            validateForm();
+        });
+    </script> -->
+</body>
+
+</html>

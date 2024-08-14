@@ -1,0 +1,53 @@
+<div id="container-exp">
+	<div id="trial">
+		<center>
+			<h2>How do you feel when you see this image?</h2>
+		</center>
+		<div id="stim"></div>
+
+		<center>
+			<table text-align="left">
+				<tr>
+					<td style="padding-right:5px"><input id="response" type="radio" name="response" oninput="change_class()" onchange="change_class()" value="amusement">amusement</td>					
+					<td style="padding-right:5px"><input id="response" type="radio" name="response" oninput="change_class()" onchange="change_class()" value="awe">awe</td>
+					<td style="padding-right:5px"><input id="response" type="radio" name="response" oninput="change_class()" onchange="change_class()" value="happiness">happiness</td>
+					<td style="padding-right:5px"><input id="response" type="radio" name="response" oninput="change_class()" onchange="change_class()" value="excitement">excitement</td>
+				</tr>
+				<tr>
+					<td style="padding-right:5px"><input id="response" type="radio" name="response" oninput="change_class()" onchange="change_class()" value="anger">anger</td>
+					<td style="padding-right:5px"><input id="response" type="radio" name="response" oninput="change_class()" onchange="change_class()" value="disgust">disgust</td>					
+					<td style="padding-right:5px"><input id="response" type="radio" name="response" oninput="change_class()" onchange="change_class()" value="fear">fear</td>
+					<td style="padding-right:5px"><input id="response" type="radio" name="response" oninput="change_class()" onchange="change_class()" value="sadness">sadness</td>
+				</tr>
+			</table>
+		</center>
+
+		<button type="button" id="emotion_level" class="btn btn-primary btn-lg pull-right">
+			Select Emotion Level
+		</button>
+		<div id="div1" style="display:none">Drag the slider to record your level of this emotion: 
+			<span id="emo_value">0</span>%
+			<center>
+				Least <p id="emo_least" style="display:inline;"> </p>
+				<input id="range" type="range" style="width: 60%;display:inline;" min="0" max="100" value="0" step="10" oninput="change()" onchange="change()">
+				Most <p id="emo_most" style="display:inline;"> </p>
+				<script type='text/javascript'>
+					function change() {
+						var emo_value = document.getElementById('range').value ;
+						document.getElementById('emo_value').innerHTML = emo_value;
+					}
+					function change_class() {
+						var emo_class = document.querySelector('input[name="response"]:checked').value ;
+						document.getElementById('emo_least').innerHTML = emo_class;
+						document.getElementById('emo_most').innerHTML = emo_class;
+					}
+				</script>
+			</center>
+			<button type="button" id="submittrial" value="submittrial" class="btn btn-primary btn-lg pull-right">
+				Submit <span class="glyphicon glyphicon-arrow-right"></span>
+			</button>
+		</div>
+
+    	<div id="demo"></div>
+	</div>
+</div>

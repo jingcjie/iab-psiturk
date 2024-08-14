@@ -1,0 +1,14 @@
+# Ignore compiled files
+*.class
+*.o
+
+# Ignore logs
+*.log
+
+# Ignore directories
+node_modules/
+__pycache__/
+
+# Ignore specific files
+config.ini
+secrets.yml

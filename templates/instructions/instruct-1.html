@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instructions</title>
+  <style>
+    #hiddenInput {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container-instructions">
+    <h1>Instructions</h1>
+    <hr />
+    <div class="instructions well">
+      <p>
+        You will be presented with a video of moving objects.
+        Your task is to count the number of times the black ball crosses the midline.
+        Try to be as accurate as possible.
+      </p>
+      <strong>Let's practise with a sample trial. Please take the practice seriously and view the videos in
+        FullScreen.<br>
+        Note that you only have three chances to learn the task. If you do not pass the practice, you cannot proceed.
+      </strong><br>
+    </div>
+
+    <center>
+      <video id="my-video" class="video-js" preload="auto" width="1920" height="1080">
+        <source src="https://iabshui.s3.amazonaws.com/test_vids/video.mp4" type="video/mp4" />
+      </video>
+    </center>
+
+    <center>
+      <input type="number" id="hiddenInput" name="hiddenInput" placeholder="Num of midline crossings"
+        style="display:none;">
+    </center>
+
+    <center><button type="button" id="start-btn" disabled>Start</button></center>
+
+    <script type="text/javascript">
+      cnt_retry = 2
+      mplayer = videojs('my-video');// define player
+      var escFullscreen = false;
+      mplayer.ready(function () {
+        // Enable start button when video can play through
+        mplayer.on("canplaythrough", function () {
+          document.getElementById("start-btn").disabled = false;
+        });
+
+
+        // // Event listener for keydown events on the document
+        // document.addEventListener('keydown', function(event) {
+        //   // Check if the pressed key is the Escape key (Esc key code is 27)
+        //   if (event.key === 'Escape' || event.keyCode === 27) {
+        //     escFullscreen=true;
+        //   }
+        // });
+
+        // if (document.addEventListener)
+        //   {
+        //   document.addEventListener('fullscreenchange', exitHandler, false);
+        //   document.addEventListener('mozfullscreenchange', exitHandler, false);
+        //   document.addEventListener('MSFullscreenChange', exitHandler, false);
+        //   document.addEventListener('webkitfullscreenchange', exitHandler, false);
+        //   }
+
+        //   function exitHandler()
+        //   {
+        //   if (!document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement)
+        //   {
+        //     escFullscreen=true;
+        //   }
+        //   }
+
+
+
+      });
+      mplayer.on('fullscreenchange', function () {
+        console.log('fullscreen change!')
+        if (!mplayer.isFullscreen() && !mplayer_ended) {
+          console.log(mplayer.currentTime())
+          console.log(mplayer.duration())
+          escFullscreen = true;
+          mplayer.currentTime(mplayer.duration());
+          // mplayer.pause();
+        }
+      })
+
+      // when player finishes playing, exit fullscreen and request input
+      mplayer.on("ended", function () {
+        mplayer_ended = true
+        console.log(escFullscreen)
+        if (!escFullscreen) {
+          mplayer.exitFullscreen();
+          var hiddenInput = document.getElementById('hiddenInput');
+          hiddenInput.style.display = 'block';
+          document.getElementById('start-btn').innerText = 'Submit';
+
+          // upon clicking the button
+          document.getElementById("start-btn").onclick = function () {
+            hiddenInput.style = 'display:none;';
+
+            min_value = 10 * .8; max_value = 10 * 1.2;
+            input_value = parseInt(hiddenInput.value)
+
+            if (input_value >= min_value && input_value <= max_value) {
+              document.getElementById("start-btn").innerText = 'Correct!';
+              document.getElementById("start-btn").disabled = true;
+              document.getElementById("next").style.display = 'block';
+            } else {
+              if (cnt_retry == 0) {
+                prom_text = 'Incorrect.';
+                alert("You have run out of chances.you may not proceed");
+                window.close();
+              }
+              prom_text = 'Incorrect, try again. ' + cnt_retry + " chance(s) left."
+              cnt_retry = cnt_retry - 1;
+              document.getElementById("start-btn").innerText = prom_text;
+              document.getElementById('start-btn').onclick = function (e) {
+                mplayer.requestFullscreen();
+                mplayer.play();
+                mplayer_ended = false;
+                escFullscreen = false;
+              };
+            }
+          }
+
+        } else {
+
+          if (cnt_retry == 0) {
+            prom_text = 'Please use fullscreen.';
+            alert("You have run out of chances.you may not proceed");
+            window.close();
+          }
+
+          prom_text = 'Please use fullscreen. ' + cnt_retry + " chance(s) left."
+          cnt_retry = cnt_retry - 1;
+          document.getElementById("start-btn").innerText = prom_text;
+          document.getElementById('start-btn').onclick = function (e) {
+            mplayer.requestFullscreen();
+            mplayer.play();
+            mplayer_ended = false;
+            escFullscreen = false;
+
+          }
+        }
+      });
+
+      document.getElementById('start-btn').onclick = function (e) {
+        mplayer_ended = false
+        mplayer.requestFullscreen();
+        mplayer.play();
+      };
+
+    </script>
+    <hr />
+    <div class="instructionsnav">
+      <div class="row">
+        <div class="col-xs-2">
+          <!-- no previous button on first screen -->
+        </div>
+        <div class="col-xs-8">
+        </div>
+        <div class="col-xs-2">
+          <button type="button" id="next" value="next" style="display:none;" class="btn btn-primary btn-lg continue">
+            Next <span class="glyphicon glyphicon-arrow-right"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  .
+</body>
+
+</html>
