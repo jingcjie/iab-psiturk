@@ -235,6 +235,14 @@ var IABtask = function () {
 					document.getElementById('exp_play').innerText = 'Submit';
 
 					play_button = document.getElementById("exp_play")
+					// Disable the button by default
+					play_button.disabled = true;
+
+					// Add an event listener to the input field
+					hiddenInput.addEventListener('input', function() {
+					    // Enable the button only if the input has a valid number
+					    play_button.disabled = !this.value.trim() || isNaN(parseInt(this.value));
+					});
 					// upon clicking the button
 					play_button.onclick = function () {
 						var hiddenInput = document.getElementById('hiddenInput');
@@ -384,6 +392,14 @@ var Questionnaire = function () {
 // Task object to keep track of the current phase
 var currentview;
 
+document.addEventListener('resolutionMeasured', function (event) {
+    var width = event.detail.width;
+    var height = event.detail.height;
+	console.log("Resolution: " + width + "x" + height);
+    // Record the resolution data using psiTurk
+    psiTurk.recordUnstructuredData('screen_width', width);
+    psiTurk.recordUnstructuredData('screen_height', height);
+});
 /*******************
  * Run Task
  ******************/

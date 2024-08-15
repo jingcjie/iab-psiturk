@@ -12,3 +12,4 @@ __pycache__/
 # Ignore specific files
 config.ini
 secrets.yml
+participants.db

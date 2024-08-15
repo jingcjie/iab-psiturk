@@ -115,6 +115,15 @@
         document.getElementById('refresh-rate').innerText = `Estimated Refresh Rate: ${roundedRefreshRate} Hz`;
         // Display screen resolution
         document.getElementById('resolution').innerText =`Screen Resolution: ${screenWidth} x ${screenHeight}`;
+        var resolutionEvent = new CustomEvent('resolutionMeasured', {
+        detail: {
+            width: screenWidth,
+            height: screenHeight
+          }
+        });
+
+        // Dispatch the event
+        document.dispatchEvent(resolutionEvent);
 
         // if (roundedRefreshRate < requiredRate-5 ||roundedRefreshRate > requiredRate+5|| screenWidth !== requiredWidth || screenHeight !== requiredHeight) {
         //   document.getElementById('feedback').innerText ='Please set your screen refresh rate to 60 Hz and ensure your screen resolution is 1920x1080 at 100% scaling.\nThen click ok for the screen check again.';
