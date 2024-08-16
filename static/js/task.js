@@ -205,6 +205,8 @@ var IABtask = function () {
 			
 			mplayer.on("canplaythrough", function () {
 				button.style.display = 'block';
+				var hiddenInput = document.getElementById('hiddenInput');
+				hiddenInput.innerText = "Video loaded!";
 			  });
 			button.onclick = function () {
 				mplayer_ended = false
