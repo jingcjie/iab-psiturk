@@ -395,10 +395,12 @@ var currentview;
 document.addEventListener('resolutionMeasured', function (event) {
     var width = event.detail.width;
     var height = event.detail.height;
-	console.log("Resolution: " + width + "x" + height);
+	var refreshRate = event.detail.refreshRate;
+	console.log("Resolution: " + width + "x" + height + " @ " + refreshRate);
     // Record the resolution data using psiTurk
     psiTurk.recordUnstructuredData('screen_width', width);
     psiTurk.recordUnstructuredData('screen_height', height);
+	psiTurk.recordUnstructuredData('refresh_rate', refreshRate);
 });
 /*******************
  * Run Task
