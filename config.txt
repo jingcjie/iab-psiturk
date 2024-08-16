@@ -78,7 +78,7 @@ jobs_table_name = apscheduler_jobs
 # is run.
 #
 # If env var ON_CLOUD=1, then this defaults to 0.0.0.0
-host = localhost
+host = 0.0.0.0
 
 # Port on which the psiturk gunicorn server will listen when `psiturk server on`
 # is run.
@@ -110,10 +110,10 @@ enable_dashboard = false
 do_scheduler = false
 
 # Login username for the dashboard
-login_username =
+login_username = examplename
 
 # Login password for the dashboard
-login_pw =
+login_pw = examplepass
 
 # Number of threads for the psiturk gunicorn server to use. Leave to 1 if using
 # the task runner! Otherwise, dynamically dependent on the number of cpus.
@@ -124,7 +124,7 @@ threads = auto
 # to set unless using a secure function.
 # e.g.,
 #     secret_key = 'this is my secret key which is hard to guess, i should change this'
-secret_key =
+secret_key = 'this is my secret key which is hard to guess, i should change this'
 
 # The psiturk (gunicorn) server can optionally serve traffic over https. This is
 # normally not necessary if the psiturk server is set up behind a reverse proxy
