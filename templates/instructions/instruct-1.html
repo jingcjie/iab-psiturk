@@ -98,7 +98,13 @@
           mplayer.exitFullscreen();
           var hiddenInput = document.getElementById('hiddenInput');
           hiddenInput.style.display = 'block';
-          document.getElementById('start-btn').innerText = 'Submit';
+          play_button=document.getElementById('start-btn')
+          play_button.disabled = true;
+          play_button.innerText = 'Submit';
+          hiddenInput.addEventListener('input', function() {
+					    // Enable the button only if the input has a valid number
+					    play_button.disabled = !this.value.trim() || isNaN(parseInt(this.value));
+					});
 
           // upon clicking the button
           document.getElementById("start-btn").onclick = function () {

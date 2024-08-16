@@ -96,7 +96,7 @@ function changeToText() {
     span.id = 'hiddenInput';
     span.textContent = value;
     span.style.cssText = hiddenInput.style.cssText;
-    span.style.display = 'inline'; // or 'block', depending on your layout needs
+    span.style.display = 'block'; // or 'block', depending on your layout needs
 
     // Store the input's attributes for later use
     span.setAttribute('data-input-type', hiddenInput.type);
@@ -273,9 +273,10 @@ var IABtask = function () {
 		//$("body").unbind("keydown", response_handler); // Unbind keys
 		currentview = new Questionnaire();
 	};
-
-
 	// Start the test; initialize everything
+	changeToText();
+	var hiddenInput = document.getElementById('hiddenInput');
+	hiddenInput.innerText = "WAIT for the video to load before playing";
 	next();
 	
 	///////////// Function definitions //////////
