@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!-- 
+  The consent.html displays the text of your IRB-approved
+  consent form.  Even if you are not required to provide
+  a consent form, it is helpful to use this form to 
+  describe what people can do if an error comes up, etc...
+
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Psychology Experiment - Informed Consent Form</title>
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css" type="text/css" />
+        <link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+        <link rel="icon" href="/static/favicon.ico" />
+        <script type="text/javascript">
+            function onexit() {
+              self.close(); // no harm, no foul here
+            }
+        </script>
+		<style>
+			@media print {
+				body * {
+					visibility: hidden;
+				}
+				.legal, .legal * {
+					visibility: visible;
+				}
+				.legal {
+					position: absolute;
+					left: 0;
+					top: 0;
+					overflow:visible;
+				} 
+			}
+		</style>
+    </head>
+    <body>
+        <div id="container-consent">
+            <div id="consent">
+                <h1>We need your consent to proceed</h1>
+                <hr />
+                <div class="legal well">
+                    <p>
+                        You have been invited to take part in a research study named Motion Tracking.
+                    </p>
+                    <p>
+                        <b>Why is this research study being conducted? What is its purpose?</b>
+                        <br>
+                        We are interested in how people's ability to perceive moving objects. 
+                        In this study, we will present videos on a computer monitor and your
+                        task is to count the number of times the black ball crosses the midline.
+                    </p>
+                    <p>
+                        <b>What are the risks of this research study? What could go wrong?</b>
+                        <br>
+                        There is no risk incurred as a result of participating in this study. 
+                        The level of risk is the same as the one in watching TV or playing computer games. 
+                        You can pause and/or stop the test at any time if you find uncomfortable, tiring or
+                        annoying in any way. 
+                    </p>
+                    <p>
+                        <b>Are there costs associated with this research study? Will I receive any payments?</b>
+                        <br>
+                        There are no costs to you associated with this research study. 
+                        You may be given a monetary compensation to thank you for participating in this study. 
+                    </p>
+                    <p>
+                        <b>What will happen with the information obtained as part of this research study? What about confidentiality?</b>
+                        <br>
+                        All records associated with your participation in this study will be kept confidential. 
+                        Data are stored without identifiers.
+                    </p>
+                    <p>
+                        <b>If I do not want to take part in this research study, what will happen?</b>
+                        <br>
+                        Participation in this study is voluntary. You can choose not to participate in the study.
+                    </p>
+                    <p>
+                        <b>Documentation of Informed Consent and Authorization</b>
+                        <li> I have read this consent form and was given enough time to consider the decision to participate in this study. 
+                        This research study has been satisfactorily explained to me, including possible risks and benefits.
+                        All my questions were satisfactorily answered. </li>
+                        <li> I understand that participation in this research study is voluntary and that I can withdraw at any time. </li>
+                        <li> I am signing this consent form prior to participation in any research activities. </li>
+                        <li> I give permission for my participation in this research study. </li>
+                    </p>
+
+                    <button type="button" class="btn btn-default btn-sm" onClick="window.print();">
+                    <span class="glyphicon glyphicon-print"></span> Print a copy of this
+                    </button>
+                </div>
+
+                <hr />
+                <h4>Do you understand and consent to these terms?</h4>
+                <br />
+
+                <center>
+                    <button type="button" class="btn btn-primary btn-lg" onClick="window.location='/exp?hitId={{ hitid }}&assignmentId={{ assignmentid }}&workerId={{ workerid }}'">
+                    <span class="glyphicon glyphicon-ok"></span> I agree 
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-danger btn-lg" onClick="onexit()">
+                    <span class="glyphicon glyphicon-ban-circle"></span> No thanks, I do not want to do this HIT
+                    </button>
+                </center>
+
+            </div>
+        </div>
+    </body>
+</html>
+

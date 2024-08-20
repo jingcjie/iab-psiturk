@@ -9,7 +9,7 @@
     <style>
         /* Ensure the font size matches the rest of your code */
         #next {
-            font-size: 20px;
+            font-size: 22px;
             /* Adjust as necessary */
             font-family: Arial, sans-serif;
             /* Ensure consistency with your original font family */
@@ -18,7 +18,7 @@
         /* Other relevant CSS to keep font sizes consistent */
         select,
         input {
-            font-size: 20px;
+            font-size: 22px;
             /* Adjust as necessary */
             font-family: Arial, sans-serif;
             /* Ensure consistency with your original font family */
@@ -35,33 +35,48 @@
 
         <div class="instructions well">
             <form id="postquiz" action="debrief" method="post">
+                
+               <!-- beginning of a question -->
+                    <div class="row question">
+                        <div class="col-md-12">
+                            <p>Did you see anything different in the last video?</p>
+                            <!-- MCQ Options -->
+                            <table class="options">
+                                <tr>
+                                    <td>
+                                        <div class="form-check">
+                                            <input type="radio" id="option1" name="mcq-option" value="option1" class="form-check-input">
+                                            <label for="option1" class="form-check-label">
+                                                Yes:
+                                                <img id="img-option1" alt="Option 1 Image" style="width: 480px; height: 360px;">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-check">
+                                            <input type="radio" id="option2" name="mcq-option" value="option2" class="form-check-input">
+                                            <label for="option2" class="form-check-label">
+                                                Yes:
+                                                <img id="img-option2" alt="Option 2 Image" style="width: 480px; height: 360px;">
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="form-check">
+                                            <input type="radio" id="option3" name="mcq-option" value="option3" class="form-check-input">
+                                            <label for="option3" class="form-check-label">
+                                                No, I did not see anything different in the last video.
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <!-- end of a question -->
 
-                 <!-- beginning of a question -->
-                 <div class="row question">
-                    <div class="col-md-8">
-                        Did you see anything different in the LAST video?
-                    </div>
-                    <div class="col-md-4">
-                        <select id="UE-detection" name="UE-detection">
-                            <option value="1">Yes</option>
-                            <option value="0">No</option>
-                            <option value="default" SELECTED> </option>
-                        </select>
-                    </div>
-                </div>
-                <!-- end of a question -->
-
-                <!-- beginning of a question -->
-                <div class="row question">
-                    <div class="col-md-8">
-                     Please elaborate. For e.g., if you saw something different, what did you see? If you did not, please state so too.
-                    </div>
-                    <div class="col-md-12">
-                        <input type="text" id="difference" name="difference" placeholder=""
-                            style="display:block; width: 100%; height:100%; max-width: 1300px;">
-                    </div>
-                </div>
-                <!-- end of a question -->
 
 
                 <!-- beginning of a question -->
@@ -84,11 +99,14 @@
                 <!-- beginning of a question -->
                 <div class="row question">
                     <div class="col-md-8">
-                        Before today, have you heard of or completed a similar study? Please elaborate (e.g., if yes, what was the study about?)
+                        Before today, have you heard of or completed a similar study?
                     </div>
-                    <div class="col-md-12">
-                        <input type="text" id="similar" name="similar" placeholder=""
-                            style="display:block; width: 100%; height:100%; max-width: 1300px;">
+                    <div class="col-md-4">
+                        <select id="Similar" name="Similar">
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                            <option value="default" SELECTED> </option>
+                        </select>
                     </div>
                 </div>
                 <!-- end of a question -->
@@ -110,7 +128,7 @@
                             <option value="4">4</option>
                             <option value="3">3</option>
                             <option value="2">2</option>
-                            <option value="1">1 - Task was not engaging at all and I quickly lost focus.</option>
+                            <option value="1">1 - Task was not engaging, I quickly lost focus.</option>
                             <option value="default" SELECTED></option>
                         </select>
                     </div>
@@ -166,46 +184,31 @@
     </div>
 
     <!-- <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var selectElements = document.querySelectorAll('select');
-            var hiddenInput = document.getElementById('hiddenInput');
-            var nextButton = document.getElementById('next');
+        // JavaScript to read condition from sessionStorage and display it
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('here!');
+            // Retrieve the condition value from sessionStorage
+            var condition = sessionStorage.getItem('condition');
+            const folderNames = ["Horizontal", "Vertical","Curves", "Lines"];
+            
+            // Construct the image sources based on condition
+            const imgSource1 = `${imgSourceBase}${folderNames[conditionIndex]}/target.png`;
+            const imgSource2 = `${imgSourceBase}${folderNames[conditionIndex]}/nontarget.png`;
 
-            // Function to check if all fields are filled
-            function validateForm() {
-                var allFilled = true;
 
-                // Check if all select elements have a value
-                selectElements.forEach(function(select) {
-                    if (select.value === '' || select.value === 'default') {
-                        allFilled = false;
-                    }
-                });
+            // Set the src attributes of the img elements
+            const imgElement1 = document.getElementById('img-option1');
+            const imgElement2 = document.getElementById('img-option2');
 
-                // Check if the hidden input field is filled
-                if (hiddenInput && hiddenInput.value.trim() === '') {
-                    allFilled = false;
-                }
+            imgElement1.src = imgSource1;
+            imgElement2.src = imgSource2;
 
-                // Enable the "Continue" button if all fields are filled
-                if (allFilled){
-                    document.getElementById("next").style.display = 'block';
-                }
-            }
-
-            // Add event listeners to select elements and the hidden input field
-            selectElements.forEach(function(select) {
-                select.addEventListener('change', validateForm);
-            });
-
-            if (hiddenInput) {
-                hiddenInput.addEventListener('input', validateForm);
-            }
-
-            // Initial validation when the page loads
-            validateForm();
-        });
+            console.log('Image source for option 1:', imgSource1);
+            console.log('Image source for option 2:', imgSource2);
+        });      
     </script> -->
+    
+   
 </body>
 
 </html>

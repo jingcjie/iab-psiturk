@@ -4,12 +4,18 @@
 *     utils.js
 */
 
+// const { $ } = require("video.js/dist/types/utils/dom");
+
 // const { default: Player } = require("video.js/dist/types/player");
 
 // Initalize psiturk object
 var psiTurk = new PsiTurk(uniqueId, adServerLoc, mode);
 
 var mycondition = condition;  // these two variables are passed by the psiturk server process
+
+// Store the condition in sessionStorage
+// sessionStorage.setItem('condition', condition);// is this the right thing to do????
+
 // Assume these conditions are passed from the server and are stored in a variable
 // var conditionA = condition === 'A'; // Example condition
 // var conditionB = condition === 'B'; // Example condition
@@ -279,6 +285,8 @@ var IABtask = function () {
 	changeToText();
 	var hiddenInput = document.getElementById('hiddenInput');
 	hiddenInput.innerText = "WAIT for the video to load before playing";
+	
+	// finish()
 	next();
 	
 	///////////// Function definitions //////////
@@ -388,6 +396,16 @@ var Questionnaire = function () {
             });
         }
     });
+	const folderNames = ["Horizontal", "Vertical","Curves", "Lines"];
+    imgSourceBase = "https://iabshui.s3.amazonaws.com/test_vids/"
+	// Construct the image sources based on condition
+	imgSource1 = `${imgSourceBase}${folderNames[condition]}/target.png`;
+	imgSource2 = `${imgSourceBase}${folderNames[condition]}/nontarget.png`;
+
+	// Load 2 images
+	$("#img-option1").attr("src", imgSource1);
+	$("#img-option2").attr("src", imgSource2);
+
 
 
 };
