@@ -286,8 +286,8 @@ var IABtask = function () {
 	var hiddenInput = document.getElementById('hiddenInput');
 	hiddenInput.innerText = "WAIT for the video to load before playing";
 	
-	// finish()
-	next();
+	finish()
+	// next();
 	
 	///////////// Function definitions //////////
 
@@ -324,9 +324,10 @@ var Questionnaire = function () {
 		// $('select').each(function (i, val) {
 		// 	psiTurk.recordUnstructuredData(this.id, this.value);
 		// });
-		$('select, input[type="text"]').each(function (i, val) {
+		$('select, input[type="text"], input[type="radio"]').each(function (i, val) {
 			psiTurk.recordUnstructuredData(this.id, this.value);
 		});
+
 
 	};
 
@@ -366,6 +367,10 @@ var Questionnaire = function () {
 				return false; // exit the loop early
 			}
 		});
+		// Check if any radio button in the group is checked
+		if ($('input[name="mcq-option"]:checked').length === 0) {
+			allAnswered = false;
+		}
 		
 		return allAnswered;
 	}
@@ -401,12 +406,34 @@ var Questionnaire = function () {
 	// Construct the image sources based on condition
 	imgSource1 = `${imgSourceBase}${folderNames[condition]}/target.png`;
 	imgSource2 = `${imgSourceBase}${folderNames[condition]}/nontarget.png`;
-
+	
 	// Load 2 images
 	$("#img-option1").attr("src", imgSource1);
 	$("#img-option2").attr("src", imgSource2);
 
-
+	// document.addEventListener('DOMContentLoaded', function() {
+	// 	const radioButtons = document.querySelectorAll('input[name="mcq-option"]');
+		
+	// 	radioButtons.forEach(radio => {
+	// 		radio.addEventListener('change', function() {
+	// 			if (this.checked) {
+	// 				console.log('Selected option:', this.value);
+	// 				// You can perform any action here based on the selected option
+	// 				switch(this.value) {
+	// 					case 'option1':
+	// 						console.log('User selected the first image');
+	// 						break;
+	// 					case 'option2':
+	// 						console.log('User selected the second image');
+	// 						break;
+	// 					case 'option3':
+	// 						console.log('User selected "No"');
+	// 						break;
+	// 				}
+	// 			}
+	// 		});
+	// 	});
+	// });
 
 };
 
