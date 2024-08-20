@@ -12,3 +12,4 @@ __pycache__/
 # Ignore specific files
 participants.db
 server.log
+.psiturk_history
