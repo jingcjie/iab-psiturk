@@ -324,10 +324,15 @@ var Questionnaire = function () {
 		// $('select').each(function (i, val) {
 		// 	psiTurk.recordUnstructuredData(this.id, this.value);
 		// });
-		$('select, input[type="text"], input[type="radio"]').each(function (i, val) {
+		$('select, input[type="text"]').each(function (i, val) {
 			psiTurk.recordUnstructuredData(this.id, this.value);
 		});
-
+		$('input[type="radio"]').each(function (i, val) {
+			if ($(this).is(':checked')) {
+				console.log(this.id + " is checked");
+				psiTurk.recordUnstructuredData(this.id, this.value);
+			}
+		});
 
 	};
 
