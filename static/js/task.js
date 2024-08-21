@@ -286,8 +286,8 @@ var IABtask = function () {
 	var hiddenInput = document.getElementById('hiddenInput');
 	hiddenInput.innerText = "WAIT for the video to load before playing";
 	
-	finish()
-	// next();
+	// finish()
+	next();
 	
 	///////////// Function definitions //////////
 
@@ -400,7 +400,7 @@ var Questionnaire = function () {
             record_responses();
             psiTurk.saveData({
                 success: function () {
-                    psiTurk.completeHIT(); // when finished saving compute bonus, then quit
+                    psiTurk.completeHIT(); 
                 },
                 error: prompt_resubmit
             });
