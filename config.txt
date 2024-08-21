@@ -163,7 +163,7 @@ server_timeout = 30
 experiment_code_version = 1.0
 
 # The number of possible treatments. Used for random balanced assignment.
-num_conds = 4
+num_conds = 2
 
 # The number of possible counterbalance conditions. Used for random balanced assignment.
 # If you don't know what this is, it is safe to leave it at a default of 1 and
