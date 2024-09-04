@@ -89,7 +89,8 @@ var instructionPages = [ // add as a list as many pages as you like
 * Inattentional blindness task       *
 ********************/
 
-const folderNames = ["Horizontal", "Vertical","Curves", "Lines"];
+const folderNames = ["Horizontal", "Vertical","Horizontal", "Vertical", "Horizontal", "Vertical"]; //it's stupid, but fastest way w/o much code change
+const subfolderNames = ["3", "3","4", "4", "5", "5"]; // need to organize s3 bucket
 
 function changeToText() {
     var hiddenInput = document.getElementById('hiddenInput');
@@ -145,7 +146,7 @@ var IABtask = function () {
 	//var vid_num = _.range(1, TotalNumVideos + 1);// for piloting code only
 	var vid_num = getRandomSample(5, TotalNumVideos);// to randomly sample video
 	var vidlist = [];
-	var vidID = [];
+	var vidID;
 	//var folderID=0;
 	var trialindex = 0;
 	//var current_video;
@@ -190,9 +191,9 @@ var IABtask = function () {
 			
 			console.log(vidID)
 			if(trialindex<4){
-				video_src = "https://iabshui.s3.amazonaws.com/test_vids/" + folderNames[mycondition] + "/NoTarget/" + vidID.video;
+				video_src = "https://iabshui.s3.amazonaws.com/test_vids/" + folderNames[mycondition] + "/NoTarget/" +subfolderNames[mycondition] +"/"+vidID.video;
 			} else {
-				video_src = "https://iabshui.s3.amazonaws.com/test_vids/" + folderNames[mycondition] + "/TargetPresent/" + vidID.video;
+				video_src = "https://iabshui.s3.amazonaws.com/test_vids/" + folderNames[mycondition] + "/TargetPresent/" +subfolderNames[mycondition] +"/"+ vidID.video;
 			}
 
 			console.log(video_src)
@@ -293,7 +294,7 @@ var IABtask = function () {
 
 	// Function to generate random sample of integers without replacement
 	function getRandomSample(size, max) {
-		const numbers = Array.from({ length: max }, (_, i) => i + 1);
+		const numbers = Array.from({ length: max }, (_, i) => i);
 		const sample = [];
 
 		for (let i = 0; i < size; i++) {
