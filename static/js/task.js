@@ -407,11 +407,11 @@ var Questionnaire = function () {
             });
         }
     });
-	const folderNames = ["Horizontal", "Vertical","Curves", "Lines"];
+	const folderNames = ["Horizontal", "Vertical","Horizontal", "Vertical", "Horizontal", "Vertical"]; 
     imgSourceBase = "https://iabshui.s3.amazonaws.com/test_vids/"
 	// Construct the image sources based on condition
-	imgSource1 = `${imgSourceBase}${folderNames[condition]}/target.png`;
-	imgSource2 = `${imgSourceBase}${folderNames[condition]}/nontarget.png`;
+	imgSource1 = `${imgSourceBase}${folderNames[mycondition]}/target.png`;
+	imgSource2 = `${imgSourceBase}${folderNames[mycondition]}/nontarget.png`;
 	
 	// Load 2 images
 	$("#img-option1").attr("src", imgSource1);
